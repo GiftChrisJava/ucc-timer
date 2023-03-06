@@ -42,7 +42,7 @@ export default function Home() {
             setSeconds((prev) => prev - 1);
           }
         }
-      }, 1000);
+      }, 990);
     } else {
       clearInterval(interval);
     }
@@ -88,52 +88,57 @@ export default function Home() {
     color: isCountingUp ? "red" : "white",
   };
   return (
-    <div className="container">
-      <div className="inputs_container">
-        <label htmlFor="hours">Hours :</label>
-        <input
-          type="number"
-          className="input"
-          id="hours"
-          name="hours"
-          value={hours}
-          onChange={handleHourChange}
-        />
+    <>
+      <Head>
+        <title>UCC COUNTDOWN TIMER</title>
+      </Head>
+      <div className="container">
+        <div className="timerDisplay">
+          <h2 style={labelStyle}>
+            {hours.toString().padStart(2, "0")}:
+            {minutes.toString().padStart(2, "0")}:
+            {seconds.toString().padStart(2, "0")}
+          </h2>
+        </div>
 
-        <label htmlFor="minutes">Minutes :</label>
-        <input
-          type="number"
-          id="minutes"
-          className="input"
-          name="minutes"
-          value={minutes}
-          onChange={handleMinutesChange}
-        />
+        <div className="inputs_container">
+          <label htmlFor="hours">Hours :</label>
+          <input
+            type="number"
+            className="input"
+            id="hours"
+            name="hours"
+            value={hours}
+            onChange={handleHourChange}
+          />
 
-        <label htmlFor="seconds">Seconds :</label>
-        <input
-          type="number"
-          className="input"
-          id="seconds"
-          name="seconds"
-          value={seconds}
-          onChange={handleSecondsChange}
-        />
+          <label htmlFor="minutes">Minutes :</label>
+          <input
+            type="number"
+            id="minutes"
+            className="input"
+            name="minutes"
+            value={minutes}
+            onChange={handleMinutesChange}
+          />
+
+          <label htmlFor="seconds">Seconds :</label>
+          <input
+            type="number"
+            className="input"
+            id="seconds"
+            name="seconds"
+            value={seconds}
+            onChange={handleSecondsChange}
+          />
+        </div>
+
+        <div className="buttons">
+          {!timerOn && <button onClick={startTimer}>Start</button>}
+          {!timerOn && <button onClick={stopTimer}>Stop</button>}
+          <button onClick={resertTimer}>Reset</button>
+        </div>
       </div>
-
-      <div className="timerDisplay">
-        <h2 style={labelStyle}>
-          {hours.toString().padStart(2, "0")}:
-          {minutes.toString().padStart(2, "0")}:
-          {seconds.toString().padStart(2, "0")}
-        </h2>
-      </div>
-
-      <div className="buttons">
-        {!timerOn && <button onClick={startTimer}>Start</button>}
-        {!timerOn && <button onClick={stopTimer}>Stop</button>}
-        <button onClick={resertTimer}>Reset</button>
-      </div>
-    </div>
+    </>
   );
 }
